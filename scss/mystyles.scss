@@ -1,0 +1,888 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+
+// Set your brand colors
+$purple: #8A4D76;
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+$sky-blue: #12acdf;
+$body-bg-color:#ffffff;
+$body-font-size: 16px;
+$white: #ffffff;
+$black-text: #323232;
+$light-gray: #F3F4F8;
+$black-1: #010101;
+$blue: #367BED;
+
+// Update Bulma's global variables
+$family-sans-serif: "Lato",
+sans-serif;
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $sky-blue;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $body-bg-color;
+$control-border-width: 1px;
+$input-border-color: #000000;
+$input-shadow: none;
+
+// custom var
+$container-width: 1134px+30px;
+
+// functions
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return #{$remSize}rem;
+}
+
+// Mixin that will include the fall back px declaration as well as the calculated rem value.
+@mixin rem($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+// Importing Bulma
+@import "../node_modules/bulma/bulma.sass";
+
+// container width and reset css
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    color: $black-text;
+}
+
+@media(min-width:1024px) {
+    .container {
+        max-width: $container-width;
+    }
+}
+
+img {
+    vertical-align: middle;
+}
+
+.columns {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.light-gray-bg {
+    background-color: $light-gray;
+}
+
+// header
+header {
+    padding: 20px 0;
+}
+
+.fasting-logo {
+    a {
+        display: inline-block;
+    }
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.column {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.offer-timer {
+    background-color: $sky-blue;
+    color: $white;
+    padding: 25px 0;
+
+    h2 {
+        @include rem(34px);
+        line-height: 1.2;
+        font-weight: 700;
+
+        span {
+            display: block;
+        }
+    }
+}
+
+.timer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 0;
+
+    span,
+    label {
+        display: block;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    span {
+        @include rem(41.76px);
+        line-height: 38px;
+        margin-bottom: 10px;
+    }
+
+    label {
+        @include rem(16.57px);
+        line-height: 17px;
+    }
+
+    li:not(:last-child) {
+        padding-right: 34px;
+    }
+}
+
+// title css
+.title {
+    color: $black-text;
+    font-weight: 700;
+}
+
+h1.title {
+    @include rem(44.48px);
+}
+
+// get app
+.get-app-sec {
+    padding: 40px 0;
+
+    .container {
+        max-width: 1100px;
+    }
+
+    .title {
+        margin-top: 10px;
+        margin-bottom: 40px;
+    }
+}
+
+.key-points {
+    li {
+        display: block;
+        position: relative;
+        padding-left: 50px;
+        @include rem(25.67px);
+        color: $black-text;
+        line-height: 30px;
+        font-weight: 500;
+        margin-bottom: 20px;
+
+        &::before {
+            content: '';
+            width: 27px;
+            height: 27px;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            background-image: url('../img/option-checked.png');
+        }
+    }
+}
+
+.step-sec {
+    padding: 40px 0;
+}
+
+// choose plan
+.step-title {
+    span {
+        display: inline-block;
+        color: $black-1;
+        @include rem(20.41px);
+        line-height: 19px;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        @include rem(37.51px);
+    }
+}
+
+.choose-plan {
+    .step-title {
+        margin-bottom: 20px;
+    }
+}
+
+.radio-card {
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px -3px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    position: relative;
+
+    label {
+        cursor: pointer;
+        display: block;
+        padding: 22px 15px 22px 40px;
+        position: relative;
+        border-radius: 10px;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px solid $blue;
+            border-radius: 10px;
+            opacity: 0;
+            transition: all ease-in-out 0.3s;
+        }
+
+        &:hover {
+            &::before {
+                opacity: 0.2;
+            }
+
+            .discount {
+                background-color: $sky-blue;
+                color: $white;
+            }
+        }
+    }
+
+    .radio-status {
+        position: absolute;
+        content: '';
+        width: 23px;
+        height: 23px;
+        top: 21px;
+        left: 15px;
+        background-image: url('../img/option-unchecked.png');
+        background-size: contain;
+        z-index: 5;
+        transition: all ease-in-out 0.3s;
+    }
+
+    input[type="radio"] {
+        // opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.plan-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 13px;
+
+    .name {
+        color: $black-text;
+        @include rem(18.32px);
+        line-height: 21px;
+    }
+
+    .discount {
+        color: $black-1;
+        @include rem(12.06px);
+        line-height: 14px;
+        text-transform: uppercase;
+        background-color: #E0E0E0;
+        padding: 3px 14px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        transition: all ease-in-out 0.3s;
+    }
+}
+
+.plan-cost {
+    h3 {
+        @include rem(44.38px);
+        line-height: 52px;
+    }
+
+    span {
+        @include rem(18px);
+        vertical-align: baseline;
+    }
+
+    .money-icon {
+        @include rem(22px);
+        line-height: 22px;
+        vertical-align: super;
+    }
+}
+
+.plan-desc {
+    margin-top: 10px;
+
+    p {
+        @include rem(12px);
+        line-height: 12px;
+        color: #8B8B8B;
+
+        span {
+            color: #FF0000;
+            text-decoration: line-through;
+        }
+    }
+}
+
+.radio-card {
+    input[type="radio"] {
+        &:checked+label {
+            &::before {
+                opacity: 1;
+            }
+
+            .radio-status {
+                background-image: url('../img/option-checked.png');
+            }
+
+            .discount {
+                background-color: $sky-blue;
+                color: $white;
+            }
+        }
+    }
+}
+
+.plan-important-notice {
+    background-color: #d8e6f6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 30px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 19px;
+        background-image: url('../img/angle-up.png');
+        background-size: contain;
+        left: 50%;
+        top: -13px;
+        transform: translateX(-50%);
+    }
+
+    p {
+        text-align: center;
+
+        span {
+            @include rem(20px);
+            line-height: 20px;
+            margin-bottom: 8px;
+            color: $black-text;
+            display: block;
+        }
+
+        @include rem(17px);
+        line-height: 17px;
+        color: $sky-blue;
+        font-weight: 700;
+    }
+}
+
+// create acc step 2
+.input,
+.textarea,
+.select select {
+    border-radius: 8px;
+    transition: all ease-in-out 0.3s;
+    min-height: 48px;
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-color: $sky-blue;
+    }
+}
+
+.create-acc {
+    .container {
+        max-width: 834px;
+    }
+
+    .step-title {
+        margin-bottom: 40px;
+    }
+
+    .info {
+        text-align: center;
+        margin-top: 24px;
+        @include rem(15.22px);
+        line-height: 15px;
+        font-weight: 300;
+    }
+}
+
+// payment-method
+.payment-method {
+    .step-title {
+        margin-bottom: 25px;
+    }
+}
+
+.payment-radio {
+    .radio-card {
+        margin-bottom: 22px;
+    }
+
+    .payment-method-img {
+        text-align: center;
+
+        img {
+            max-width: 100%;
+            margin-top: 18px;
+        }
+    }
+}
+
+.border-line {
+    border: 1px solid #9A9A9A;
+    border-radius: 10px;
+}
+
+.payment-detail-inputs {
+    padding: 18px 30px;
+
+    h4 {
+        @include rem(27.41px);
+        line-height: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+
+    .field {
+        margin-bottom: 20px;
+    }
+
+    .label {
+        @include rem(20px);
+        line-height: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+
+        span {
+            color: #C1C1C1;
+            @include rem(16px);
+            line-height: 15px;
+            vertical-align: baseline;
+            margin-left: 16px;
+        }
+    }
+
+    .field-button {
+        margin-top: 35px;
+        margin-bottom: 16px;
+
+        .button {
+            @include rem(24.69px);
+            line-height: 15px;
+            border-radius: 25px;
+        }
+    }
+
+    .term-info {
+        @include rem(15px);
+        text-align: center;
+        font-weight: 400;
+        line-height: 18px;
+        margin-bottom: 20px;
+    }
+
+    .trust-brand {
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+.total-plan-cost-display {
+    padding: 40px 20px 30px;
+
+    .table,
+    .table thead td,
+    .table thead th,
+    .table td,
+    .table th {
+        border: 0;
+        background-color: transparent;
+    }
+
+    .table thead th {
+        padding: 0;
+        @include rem(31.21px);
+        line-height: 37px;
+        font-weight: 500;
+    }
+
+    .table tbody td {
+        @include rem(18.74px);
+        line-height: 22.49px;
+        color: #969696;
+        padding: 28px 0 0;
+    }
+
+    .table tbody td:last-child,
+    .table thead th:last-child {
+        text-align: right;
+    }
+}
+
+.is-red {
+    color: #FF0000 !important;
+}
+
+.client-story {
+    padding: 18px 0 10px;
+
+    .step-title {
+        margin-bottom: 18px;
+
+        h2 {
+            margin-bottom: 8px;
+        }
+
+        p {
+            @include rem(25px);
+            line-height: 30px;
+            color: #868686;
+        }
+    }
+}
+
+.story-block {
+    text-align: center;
+    margin-bottom: 25px;
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+
+    img {
+        max-width: 100%;
+        margin: 0 auto 30px 0;
+        transition: all ease-in-out 0.3s;
+    }
+
+    h2 {
+        @include rem(31.09px);
+        line-height: 37px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    p {
+        @include rem(20px);
+        line-height: 24px;
+        font-weight: 300;
+        color: #323232;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.1);
+        }
+    }
+}
+
+// App User
+.light-sky-bg {
+    background-color: #DDF3FA;
+}
+
+.app-user {
+    padding: 35px 0;
+
+    .title {
+        margin-bottom: 36px;
+    }
+
+    .key-points {
+        margin-bottom: 25px;
+
+        li {
+            @include rem(23px);
+            line-height: 26px;
+            font-weight: 400;
+            padding-right: 30px;
+        }
+    }
+
+    .payment-detail-inputs {
+        padding: 0;
+
+        .field-button {
+            margin: 50px 0 0;
+        }
+    }
+}
+
+// media
+@media(max-width:1199px) {
+    .offer-timer {
+        h2 {
+            @include rem(32px);
+        }
+    }
+}
+
+@media(max-width:991px) {
+
+    h1.title,
+    .step-title .title {
+        @include rem(32px);
+    }
+
+    .key-points li {
+        @include rem(24px);
+    }
+
+    .get-app-sec .title {
+        margin-top: 0;
+    }
+
+    .payment-detail-inputs {
+        .label {
+            @include rem(16px);
+            margin-bottom: 6px;
+
+            span {
+                @include rem(12px);
+                line-height: 12px;
+                margin-left: 11px;
+            }
+        }
+
+        .field-button {
+            margin: 15px 0;
+        }
+
+        .field-button .button {
+            @include rem(20px);
+        }
+    }
+
+    .total-plan-cost-display {
+        padding: 20px;
+
+        .table thead th {
+            @include rem(22px);
+        }
+
+        .table tbody td {
+            @include rem(16px);
+            padding: 20px 0 0;
+        }
+    }
+
+    .input,
+    .textarea,
+    .select select {
+        min-height: 40px;
+    }
+
+    .client-story {
+        .step-title p {
+            @include rem(20px);
+            line-height: 25px;
+        }
+    }
+
+    .story-block {
+        img {
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            @include rem(22px);
+            line-height: 22px;
+        }
+
+        .story-block p {
+            @include rem(17px);
+            line-height: 20px;
+        }
+    }
+}
+
+@media(max-width:768px) {
+    header {
+        padding: 15px 0;
+    }
+
+    .fasting-logo {
+        a {
+            width: 150px;
+        }
+    }
+
+
+    .offer-timer {
+        h2 {
+            @include rem(22px);
+        }
+    }
+
+    .timer {
+        padding: 0;
+
+        li:not(:last-child) {
+            padding-right: 20px;
+        }
+
+        span {
+            @include rem(30px);
+            line-height: 28px;
+        }
+
+        label {
+            @include rem(12px);
+        }
+    }
+
+    h1.title {
+        @include rem(32px);
+    }
+
+    .get-app-sec {
+        .title {
+            margin: 0 0 25px;
+        }
+    }
+
+    .radio-card {
+        margin-top: 30px;
+    }
+
+    .create-acc .step-title {
+        margin-bottom: 20px;
+    }
+
+    .is-row-reverse-desktop {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .payment-method {
+        .radio-card {
+            label {
+                min-height: 110px;
+            }
+        }
+    }
+
+    .plan-name .name {
+        @include rem(15px);
+    }
+
+    .app-user .title {
+        margin-bottom: 25px;
+    }
+
+    .app-user .key-points li {
+        @include rem(20px);
+    }
+
+    .key-points {
+        margin-bottom: 0;
+
+        li {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+@media(max-width:576px) {
+    .offer-timer {
+        .columns.is-mobile>.column.is-6 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .timer {
+        justify-content: center;
+        padding-top: 15px;
+    }
+
+    h1.title {
+        @include rem(25px);
+    }
+
+    .get-app-sec {
+        padding: 30px 0 20px;
+
+        .title {
+            margin: 0 0 25px;
+        }
+    }
+
+    .key-points {
+        li {
+            padding-left: 35px;
+            @include rem(22px);
+            line-height: 25px;
+            margin-bottom: 15px;
+
+            &::before {
+                content: '';
+                width: 22px;
+                height: 22px;
+                background-image: url("../img/option-checked.png");
+                background-size: contain;
+            }
+        }
+    }
+
+    .step-sec {
+        padding: 30px 0;
+    }
+
+    h1.title,
+    .step-title .title {
+        @include rem(26px);
+    }
+
+    .payment-detail-inputs {
+        padding: 15px;
+
+        h4 {
+            @include rem(22px);
+            line-height: 25px;
+            margin-bottom: 25px;
+        }
+
+        .field-button .button {
+            font-size: 18px;
+            line-height: 26px;
+        }
+    }
+
+    .radio-card {
+        label {
+            padding: 22px 15px 22px 30px;
+        }
+
+        .radio-status {
+            left: 8px;
+        }
+
+        .plan-name {
+            padding-left: 10px;
+        }
+    }
+}
